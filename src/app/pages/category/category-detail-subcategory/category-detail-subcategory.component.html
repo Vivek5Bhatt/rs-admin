@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Category Details With Sub-categories</strong>
+                <div class="card-header-actions" style="height: 21px;">
+                    <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/category/edit',categoryId]">
+                        <i class="fa fa-pencil"></i> &nbsp;Edit
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Category Id</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.categoryId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Category Name</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.categoryName}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Group Id</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.groupId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Group Name</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.groupName}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Category Description</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.categoryDesc}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Created At</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.createdAt | date}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Status</label>
+                    <div class="col-md-7">
+                        {{categoryDetailWithSubCategories?.status | uppercase}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6" *ngIf="categoryDetailWithSubCategories && categoryDetailWithSubCategories.categoryImg">
+        <div class="card">
+            <div class="card-body text-center">
+                <img style="max-height: 245px;" src="{{categoryDetailWithSubCategories?.categoryImg}}"
+                    alt="{{categoryDetailWithSubCategories?.categoryName}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <strong>Sub-Category List</strong>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center"
+            *ngIf="categoryDetailWithSubCategories?.subCategory.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Image</th>
+                    <th>Sub Category Name</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subCategory of categoryDetailWithSubCategories?.subCategory; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td><img style="max-height: 50px;" src="{{subCategory.subCategoryImg}}"
+                            alt="{{subCategory.subCategoryName}}"></td>
+                    <td>{{subCategory?.subCategoryName}}</td>
+                    <td>{{subCategory?.createdAt | date}}</td>
+                    <td>
+                        <span class="badge"
+                            [ngClass]="{'badge-danger':subCategory.status=='DEACTIVE','badge-success':subCategory.status=='ACTIVE'}">{{subCategory?.status}}</span>
+                    </td>
+                    <td >
+                        <button type="submit" class="btn btn-sm btn-primary"
+                            [routerLink]="['/category/edit',categoryId,subCategory?.subCategoryId]">
+                            <i class="fa fa-pencil"></i> 
+                        </button>
+                    </td>
+                    <td>
+                        <label class="switch switch-3d switch-primary text-center 
+                        "tooltip="Change SubCategory Status">
+                       <input type="checkbox" class="switch-input" (change)="changeStatus($event, subCategory.subCategoryId,subCategory.categoryId)"
+                           [checked]="subCategory?.status == 'ACTIVE' ? true : false" />
+                       <span class="switch-slider"></span>
+                   </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!categoryDetailWithSubCategories?.subCategory.length">
+            <p class="text-center">No Data Found</p>
+        </div>
+    </div>
+</div>

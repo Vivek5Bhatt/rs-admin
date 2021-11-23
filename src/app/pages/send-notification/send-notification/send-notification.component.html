@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Send Notification</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="sendNotificationFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="title">Title</label>
+                <div class="col-md-9">
+                    <input type="text" id="title" class="form-control shadow-none" placeholder="Enter Title"
+                        formControlName="title">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="message">Message</label>
+                <div class="col-md-9">
+                    <textarea name="message" id="message" cols="30" rows="5" class="form-control shadow-none"
+                        placeholder="Enter message" formControlName="message"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="users">Select Users</label>
+                <div class="col-md-9">
+                    <ng-select [items]="usersData" multiple="true" bindLabel="fullName" bindValue="userId" id="users" formControlName="userId">
+                    </ng-select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!sendNotificationFormGroup.valid"
+            (click)="sendNotification()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>&nbsp;
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
+    </div>
+</div>

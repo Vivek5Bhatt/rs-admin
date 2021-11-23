@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Contact Information</strong>
+                <div class="card-header-actions" style="height: 21px">
+                    <button *ngIf="contactDetails" type="submit" class="btn btn-sm btn-primary" [routerLink]="['/contact-info/add']" [queryParams]="{ isUpdate: true }">
+            <i class="fa fa-pencil"></i>&nbsp; Edit
+          </button>
+                    <button *ngIf="!contactDetails" type="submit" class="btn btn-sm btn-primary" [routerLink]="['/contact-info/add']">
+            <i class="fa fa-pencil"></i>Add
+          </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Email</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Address</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.address }}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Mobile Number</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.mobileNumber }}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Phone Number</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.phoneNumber }}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Created At</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.createdAt | date }}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Updated At</label>
+                    <div class="col-md-7">
+                        {{ contactDetails?.updatedAt | date }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Affiliate Content</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="affliateFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="brandName">Affiliate Content</label>
+                <div class="col-md-9">
+                    <ckeditor id="editor" [editor]="Editor" formControlName="content" [config]="editorConfig"></ckeditor>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!affliateFormGroup.valid" (click)="addAffliate()"><i class="fa fa-dot-circle-o"></i>
+          Submit</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+          Reset</button>
+    </div>
+</div>

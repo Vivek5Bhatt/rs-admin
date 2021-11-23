@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Banner Details</strong>
+                <div class="card-header-actions" style="height: 21px;">
+                    <div style="display: flex;">
+                        <button type="button" tooltip="Delete banner" (click)="checkStatus('DELETE')" placement="top"
+                            class="btn btn-sm btn-danger mr-2 mb-2">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <label class="switch switch-label switch-success">
+                            <input type="checkbox" (change)="checkStatus($event)" class="switch-input"
+                                [checked]="bannerDetails?.status==='ACTIVE'?true:false">
+                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Banner Title</label>
+                    <div class="col-md-7">
+                        {{bannerDetails?.title}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Banner Type</label>
+                    <div class="col-md-7">
+                        {{bannerDetails?.bannerType}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Banner For</label>
+                    <div class="col-md-7">
+                        {{bannerDetails?.bannerFor}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">uploaded At</label>
+                    <div class="col-md-7">
+                        {{bannerDetails?.createdAt | date}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Status</label>
+                    <div class="col-md-7">
+                        {{bannerDetails?.status | uppercase}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6" *ngIf="bannerDetails && bannerDetails.bannerImg">
+        <div class="card">
+            <div class="card-body text-center">
+                <img style="max-height: 190px;" src="{{bannerDetails?.bannerImg}}" alt="{{bannerDetails?.title}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #confirmModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-danger modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete!</h4>
+                <button type="button" class="close" (click)="hideConfirmModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want delete this banner?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="hideConfirmModal()">No</button>
+                <button type="button" class="btn btn-danger" (click)="changeStatus()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

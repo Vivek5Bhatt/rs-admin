@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Add Delivery Charge</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="deliveryChargeFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="deliveryCharge">Delivery Charge</label>
+                <div class="col-md-9">
+                    <input type="number" id="deliveryCharge" class="form-control" placeholder="Enter Delivery Charge"
+                        formControlName="charges">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!deliveryChargeFormGroup.valid"
+            (click)="addDeliveryCharge()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
+    </div>
+</div>

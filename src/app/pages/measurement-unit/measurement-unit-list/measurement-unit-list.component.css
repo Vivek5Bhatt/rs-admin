@@ -1,0 +1,13 @@
+.gloria {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.m-LR-10 {
+    margin: 0 6px;
+}

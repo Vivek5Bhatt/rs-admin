@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Group Details</strong>
+                <div class="card-header-actions" style="height: 21px;">
+                    <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/group-name/edit',groupId]">
+                        <i class="fa fa-pencil"></i>&nbsp;Edit
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Group Id</label>
+                    <div class="col-md-7">
+                        {{groupDetails?.groupId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Group Name</label>
+                    <div class="col-md-7">
+                        {{groupDetails?.groupName}}
+                    </div>
+                </div>
+                <div class="row" *ngFor="let attribute of groupDetails?.attributes; let i=index">
+                    <label class="col-md-5"><span *ngIf="i===0">Attributes</span></label>
+                    <div class="col-md-7">
+                        Name: {{attribute?.name | titlecase}},&nbsp;
+                       <span *ngIf="attribute?.unit!=' '"> Unit: {{attribute?.unit}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Created At</label>
+                    <div class="col-md-7">
+                        {{groupDetails?.createdAt | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6" *ngIf="groupDetails && groupDetails.groupImg">
+        <div class="card">
+            <div class="card-body text-center">
+                <img style="max-height: 160px;" src="{{groupDetails?.groupImg}}" alt="{{groupDetails?.groupName}}">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+        <strong> Measurement Unit List</strong>
+        <button class="btn btn-success active float-right" [routerLink]="['/measurement/add']" routerLinkActive="router-link-active" type="button" aria-pressed="true">
+    Add Measurement Unit
+  </button>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center" *ngIf="measurements.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Measurement Name</th>
+                    <th>Measurement Unit</th>
+                    <th>Uploaded At</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer" *ngFor="let measurement of measurements; let i = index">
+                    <td>{{ i + 1 }}.</td>
+                    <td>{{ measurement?.measurementName | titlecase }}</td>
+                    <td>{{ measurement?.measurementUnit }}</td>
+                    <td>{{ measurement?.createdAt | date }}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{
+              'badge-danger': measurement.status == 'DEACTIVE',
+              'badge-success': measurement.status == 'ACTIVE'
+            }">{{ measurement?.status }}</span
+          >
+        </td>
+        <td>
+          <div class="gloria">
+            <button
+            type="submit" tooltip="See User Details" placement="top"
+            class="btn btn-sm btn-primary"
+            [routerLink]="['/measurement/add']"
+            [queryParams]="{ measurementId: measurement.measurementId }"
+          >
+            <i class="fa fa-pencil"></i>
+          </button>
+      
+       
+          <button
+            type="submit" tooltip="See User Details" placement="top"
+            class="btn btn-sm btn-primary m-LR-10"
+            (click)="deleteMeasurement(measurement.measurementId)"
+          >
+            <i class="fa fa-trash"></i>
+          </button>
+      
+          <label class="switch switch-3d switch-primary mb-0">
+            <input
+              type="checkbox"
+              class="switch-input"
+              (change)="changeStatus($event, measurement.measurementId)"
+              [checked]="measurement?.status == 'ACTIVE' ? true : false"
+            />
+            <span class="switch-slider"></span>
+                        </label>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <div *ngIf="!measurements.length">
+        <p class="text-center">No Data Found</p>
+    </div>
+</div>
+</div>

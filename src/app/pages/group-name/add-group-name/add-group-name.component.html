@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Add Group Name</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="groupNameFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="groupName">Group Name</label>
+                <div class="col-md-9">
+                    <input type="text" id="groupName" class="form-control" placeholder="Enter Group Name" formControlName="groupName">
+                </div>
+            </div>
+
+            <div formArrayName="attributes">
+                <div class="form-group row" *ngFor="let attribute of groupAttributeArray.controls;let i=index" [formGroupName]="i">
+                    <label class="col-md-3 col-form-label" for="name"><span *ngIf="i===0">Attributes</span></label>
+                    <div class="col-md-4">
+                        <input type="text" id="name" class="form-control" placeholder="Enter Name" formControlName="name">
+                    </div>
+                    <div class="col-md-3">
+                        <select id="unit" class="form-control" formControlName="unit">
+                            <option value="" disabled>Enter Unit</option>
+                            <option *ngFor="let unit of measurementUnit" [value]='unit.measurementUnit'>{{unit?.measurementUnit}}</option>
+                            <!-- <option value="mm">MM</option> -->
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" (click)="addNewGroupAttributes()" class="btn btn-success">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button type="button" (click)="removeGroupAttributes(i)" *ngIf="i>0" class="btn btn-danger">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="image">Image</label>
+                <div class="col-md-9">
+                    <ngx-dropzone (change)="onSelect($event)" [multiple]='false' [accept]="'image/*'" [expandable]="true">
+                        <ngx-dropzone-label>Drop here Or Click here</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!groupNameFormGroup.valid" (click)="addGroupName()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
+    </div>
+</div>

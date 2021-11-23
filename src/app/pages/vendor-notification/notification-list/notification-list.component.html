@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Vendor Notification List</strong>
+        <button class="btn btn-success active float-right mr-2 shadow-none" [routerLink]="['/vendor-notification/add']" routerLinkActive="router-link-active" type="button" aria-pressed="true">
+            Send Notification
+        </button>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center" *ngIf="vemdorNotificationData?.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Vendor Name</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Created At</th>
+                </tr>   
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let notifications of vemdorNotificationData; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td>{{notifications.shopName}}</td>
+                    <td>{{notifications?.title}}</td>
+                    <td>{{notifications?.message}}</td>
+                    <td>{{notifications?.createdAt | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!vemdorNotificationData?.length">
+            <p class="text-center">No Data Found</p>
+        </div>
+    </div>
+</div>

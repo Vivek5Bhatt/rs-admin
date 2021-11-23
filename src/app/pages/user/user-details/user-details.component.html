@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>User Details</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">User Id</label>
+                    <div class="col-md-7">
+                        {{userDetails?.userId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">User Email</label>
+                    <div class="col-md-7">
+                        {{userDetails?.userEmailId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Mobile Number</label>
+                    <div class="col-md-7">
+                        {{userDetails?.mobileNo}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Gender</label>
+                    <div class="col-md-7">
+                        {{userDetails?.gender | titlecase}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Is Login</label>
+                    <div class="col-md-7">
+                        {{userDetails?.isLogin?"YES":"NO"}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">created At</label>
+                    <div class="col-md-7">
+                        {{userDetails?.createdAt | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

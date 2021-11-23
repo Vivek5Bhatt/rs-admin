@@ -1,0 +1,1 @@
+export * from './quote-list/quote-list.component';

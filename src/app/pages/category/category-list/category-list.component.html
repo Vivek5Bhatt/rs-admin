@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Category List</strong>
+        <button class="btn btn-success active float-right mr-2" [routerLink]="['/category/add-sub']" routerLinkActive="router-link-active" type="button" aria-pressed="true">
+            Add Sub-category
+        </button>
+        <button class="btn btn-success active float-right mr-2" [routerLink]="['/category/add']" routerLinkActive="router-link-active" type="button" aria-pressed="true">
+            Add Category
+          </button>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center" *ngIf="categories.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Image</th>
+                    <th>category Name</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let category of categories; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td><img style="max-height: 50px;" src="{{category.categoryImg}}" alt="{{category?.categoryName}}" [routerLink]="['/category/detail',category.categoryId]" routerLinkActive="router-link-active"></td>
+                    <td>{{category?.categoryName}}</td>
+                    <td>{{category?.createdAt | date}}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{'badge-danger':category.status=='DEACTIVE','badge-success':category.status=='ACTIVE'}">{{category?.status}}</span>
+                    </td>
+                    <td>
+                        <label class="switch switch-3d switch-primary text-center 
+                        " tooltip="Change Category Status">
+                       <input type="checkbox" class="switch-input" (change)="changeStatus($event, category.categoryId)"
+                           [checked]="category?.status == 'ACTIVE' ? true : false" />
+                       <span class="switch-slider"></span>
+                   </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!categories.length">
+            <p class="text-center">No Data Found</p>
+        </div>
+    </div>
+</div>

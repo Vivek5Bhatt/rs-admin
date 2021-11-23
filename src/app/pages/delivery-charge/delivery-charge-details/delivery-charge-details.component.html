@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Delivery Charge Details</strong>
+        <div class="card-header-actions" style="height: 21px;">
+            <button *ngIf="!deliveryChargeDetail" type="submit" class="btn btn-sm btn-primary" [routerLink]="['/delivery-charge/add']">
+                <i class="fa fa-plus"></i>&nbsp; Add
+            </button>&nbsp;
+            <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/delivery-charge/edit']">
+                <i class="fa fa-pencil"></i>&nbsp; Edit
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label class="col-md-5">Delivery Id</label>
+            <div class="col-md-7">
+                {{deliveryChargeDetail?._id}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Delivery Charge</label>
+            <div class="col-md-7">
+                {{deliveryChargeDetail?.charges}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Created At</label>
+            <div class="col-md-7">
+                {{deliveryChargeDetail?.createdAt | date}}
+            </div>
+        </div>
+    </div>
+</div>

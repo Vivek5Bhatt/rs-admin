@@ -1,0 +1,307 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Vendor Details</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Vendor Id</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.vendorId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Shop Name</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopName}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Mobile Number</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.mobileNo}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Other Number</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.otherNo}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Vendor Email Id</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.vendorEmailId}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">GST Number</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.gstNumber}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">GST Status</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.gstStatus}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Is Login</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.isLogin?"YES":"NO"}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">created At</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.createdAt | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Vendor Shop Address</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-5">Address</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopAddress?.address | titlecase}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">City</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopAddress?.city | titlecase}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Landmark</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopAddress?.landmark | titlecase}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">Pin Code</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopAddress?.pincode}}
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-5">State</label>
+                    <div class="col-md-7">
+                        {{vendorDetails?.shopAddress?.state}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="kycDetails?.accountDetails">
+    <div class="card-header">
+        <strong>Account Details</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label class="col-md-5">Account Number</label>
+            <div class="col-md-7">
+                {{kycDetails?.accountDetails?.accountNumber}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">IFSC Code</label>
+            <div class="col-md-7">
+                {{kycDetails?.accountDetails?.ifsc}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Bank Name</label>
+            <div class="col-md-7">
+                {{kycDetails?.accountDetails?.bankName}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Branch Name</label>
+            <div class="col-md-7">
+                {{kycDetails?.accountDetails?.branchName}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Reject Reason</label>
+            <div class="col-md-7">
+                {{kycDetails?.accountRejectReason}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Image</label>
+            <div class="col-md-7">
+                <img height="260" width="300" src="{{kycDetails?.cancelCheque?.frontImg}}"
+                    alt="{{kycDetails?.accountDetails?.bankName}}"
+                    (click)="openModal(template,kycDetails?.cancelCheque?.frontImg,kycDetails?.accountDetails?.bankName)">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary"
+            [disabled]="kycDetails?.accountStatus==='APPROVED'?true:false"
+            (click)="approveRejectKyc('account', 'APPROVED')"><i class="fa fa-dot-circle-o"></i>
+            Approve</button>
+        <button type="reset" [disabled]="kycDetails?.accountStatus==='REJECTED'?true:false"
+            class="btn btn-sm btn-danger" (click)="showReasonModal('account')"><i class="fa fa-ban"></i>
+            Reject</button>
+    </div>
+</div>
+<div class="card" *ngIf="kycDetails?.gstNumber">
+    <div class="card-header">
+        <strong>GST Details</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label class="col-md-5">GST Number</label>
+            <div class="col-md-7">
+                {{kycDetails?.gstNumber}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Reject Reason</label>
+            <div class="col-md-7">
+                {{kycDetails?.gstRejectReason}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Image</label>
+            <div class="col-md-7">
+                <img style="max-height: 300px;" src="{{kycDetails?.gstImg?.frontImg}}" alt="{{kycDetails?.gstNumber}}"
+                    (click)="openModal(template,kycDetails?.gstImg?.frontImg,kycDetails?.gstNumber)">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="kycDetails?.gstStatus==='APPROVED'?true:false"
+            (click)="approveRejectKyc('gst', 'APPROVED')"><i class="fa fa-dot-circle-o"></i>
+            Approve</button>
+        <button type="reset" class="btn btn-sm btn-danger" [disabled]="kycDetails?.gstStatus==='REJECTED'?true:false"
+            (click)="showReasonModal('gst')"><i class="fa fa-ban"></i>
+            Reject</button>
+    </div>
+</div>
+<div class="card" *ngIf="kycDetails?.panNumber">
+    <div class="card-header">
+        <strong>PAN Details</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label class="col-md-5">PAN Number</label>
+            <div class="col-md-7">
+                {{kycDetails?.panNumber}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Reject Reason</label>
+            <div class="col-md-7">
+                {{kycDetails?.panRejectReason}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Image</label>
+            <div class="col-md-7">
+                <img style="max-height: 300px;" src="{{kycDetails?.panImg?.frontImg}}" alt="{{kycDetails?.panNumber}}"
+                    (click)="openModal(template,kycDetails?.panImg?.frontImg,kycDetails?.panNumber)">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="kycDetails?.panStatus==='APPROVED'?true:false"
+            (click)="approveRejectKyc('pan', 'APPROVED')"><i class="fa fa-dot-circle-o"></i> Approve</button>
+        <button type="reset" [disabled]="kycDetails?.panStatus==='REJECTED'?true:false" class="btn btn-sm btn-danger"
+            (click)="showReasonModal('pan')"><i class="fa fa-ban"></i> Reject</button>
+    </div>
+</div>
+<div class="card" *ngIf="kycDetails?.aadhaarCard">
+    <div class="card-header">
+        <strong>AADHAR Details</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <label class="col-md-5">AADHAR Number</label>
+            <div class="col-md-7">
+                {{kycDetails?.aadhaarCard}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Reject Reason</label>
+            <div class="col-md-7">
+                {{kycDetails?.aadharRejectReason}}
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-5">Image</label>
+            <div class="col-md-7"><br> Front: <img height="360" width="600" class="mb-2"
+                    src="{{kycDetails?.aadhaarImg?.frontImg}}" alt="Front Aadhar"
+                    (click)="openModal(template,kycDetails?.aadhaarImg?.frontImg,'Front Aadhar')">
+                <br> Back: <img height="360" width="600" src="{{kycDetails?.aadhaarImg?.backImg}}" alt="Back Aadhar"
+                    (click)="openModal(template,kycDetails?.aadhaarImg?.backImg,'Back Aadhar')">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary"
+            [disabled]="kycDetails?.aadhaarStatus==='APPROVED'?true:false"
+            (click)="approveRejectKyc('aadhar', 'APPROVED')"><i class="fa fa-dot-circle-o"></i> Approve</button>
+        <button type="reset" class="btn btn-sm btn-danger"
+            [disabled]="kycDetails?.aadhaarStatus==='REJECTED'?true:false" (click)="showReasonModal('aadhar')"><i
+                class="fa fa-ban"></i> Reject</button>
+    </div>
+</div>
+
+<!-- start Reason Modal -->
+<div bsModal #reasonModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Reason To Reject</h4>
+                <button type="button" class="close" (click)="hideReasonModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="reasonFormGroup">
+                    <div class="form-group">
+                        <label for="reason" class="col-form-label">Reason:</label>
+                        <textarea name="reason" class="form-control" id="reason" formControlName="reason" cols="30"
+                            rows="10"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="hideReasonModal()">Close</button>
+                <button type="button" class="btn btn-primary" [disabled]="!reasonFormGroup.valid"
+                    (click)="approveRejectKyc(docType, 'REJECTED')">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Reason Modal -->
+<!-- opne Image Modal -->
+<ng-template #template>
+    <div class="card">
+        <div class="card-header">
+            <strong> Image</strong>
+            <button type="button" class="btn btn-danger shadow-none" (click)="modalRef.hide()" style="float: right;">
+                <i class="fa fa-times-circle"></i></button>
+        </div>   
+    </div>
+    <div class="cart-body">
+        <div class="modal-body text-center">
+            <img  width="700" src="{{fullImage}}" alt="{{altName}}">
+        </div>
+    </div>
+</ng-template>
+<!-- End Image Modal -->

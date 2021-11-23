@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Edit Sub Category</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="subCategoryFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="categoryName">Category Name</label>
+                <div class="col-md-9">
+                  <select id="categoryName" name="categoryName" formControlName="categoryId" class="form-control">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
+                  </select>
+                </div>
+              </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="subCategoryName">Sub Category Name</label>
+                <div class="col-md-9">
+                    <input type="text" id="subCategoryName" class="form-control" placeholder="Enter Sub Category Name"
+                        formControlName="subCategoryName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="description">Descripton</label>
+                <div class="col-md-9">
+                    <textarea name="description" id="description" cols="30" rows="5" class="form-control"
+                        placeholder="Enter Sub Category Description" formControlName="subCategoryDesc"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="image">Image</label>
+                <div class="col-md-9">
+                    <ngx-dropzone (change)="onSelect($event)" [multiple]='false' [accept]="'image/*'"
+                        [expandable]="true">
+                        <ngx-dropzone-label>Drop here Or Click here</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!subCategoryFormGroup.valid"
+            (click)="editSubCategory()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
+    </div>
+</div>

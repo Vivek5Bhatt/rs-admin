@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Order List</strong>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center" *ngIf="orders.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Order Id</th>
+                    <th>Mobile Number</th>
+                    <th>User Email</th>
+                    <th>Payment Method</th>
+                    <th>Device Type</th>
+                    <th>Grand Amount</th>
+                    <th>Delivery Date</th>
+                    <th>Created At</th>
+                    <th>Download Invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let order of orders; let i=index">
+                    <td>{{i+1}}.</td>
+                    <td [routerLink]="['/order/detail',order.orderId]" routerLinkActive="router-link-active">{{order?.orderID}}</td>
+                    <td>{{order?.mobileNo}}</td>
+                    <td>{{order?.userEmailId}}</td>
+                    <td>{{order?.paymentMethod}}</td>
+                    <td>{{order?.deviceType}}</td>
+                    <td>{{order?.grandAmount}}</td>
+                    <td>
+                        <p *ngIf="order?.deliveryDate">
+                            {{order?.deliveryDate | date }}
+                        </p>
+                        <p *ngIf="!order?.deliveryDate">-</p>
+                    </td>
+                    <td>{{order?.createdAt | date}}</td>
+                    <td> 
+                        <a *ngIf="order.orderStatus<2" >-</a>
+   
+                        <a *ngIf="order.orderStatus>2" href="https://api.toqnkart.com/api/vendor/invoice?orderId={{order.orderId}}" target="_blank"  download="pdf" style="text-decoration: none;">Download</a>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!orders.length">
+            <p class="text-center">No Data Found</p>
+        </div>
+    </div>
+</div>

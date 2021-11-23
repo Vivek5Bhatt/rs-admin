@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Edit Discount</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="discountFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="discountName">Discount Name</label>
+                <div class="col-md-9">
+                    <input type="text" id="discountName" class="form-control" placeholder="Enter Discount Name"
+                        formControlName="discountName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="discountNumber">Discount Number</label>
+                <div class="col-md-9">
+                    <input type="number" id="discountNumber" class="form-control" placeholder="Enter Discount Number"
+                        formControlName="discountNumber">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="discountIn">Discount In</label>
+                <div class="col-md-9">
+                    <select id="discountIn" name="discountIn" formControlName="discountIn" class="form-control">
+                        <option value="">Select</option>
+                        <option value="ABSOLUTE">ABSOLUTE</option>
+                        <option value="PERCENTAGE">PERCENTAGE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <div class="form-group row">
+                        <label class="col-md-6 col-form-label" for="validFrom">Valid From</label>
+                        <div class="col-md-6">
+                            <input type="date" class="form-control" id="validFrom" [min]="minFromDate" name="validFrom"
+                                formControlName="validFrom">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <div class="form-group row">
+                        <label class="col-md-6 col-form-label" for="validUpto">Valid Up To</label>
+                        <div class="col-md-6 ">
+                            <input type="date" class="form-control" id="validUpto" [min]="minUpToDate" name="validUpto"
+                                formControlName="validUpto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="image">Image</label>
+                <div class="col-md-9">
+                    <ngx-dropzone (change)="onSelect($event)" [multiple]='false' [accept]="'image/*'"
+                        [expandable]="true">
+                        <ngx-dropzone-label>Drop here Or Click here</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!discountFormGroup.valid"
+            (click)="editDiscount()"><i class="fa fa-dot-circle-o"></i>
+            Submit</button>&nbsp;
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+            Reset</button>
+    </div>
+</div>

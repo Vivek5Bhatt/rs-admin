@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+        <strong *ngIf="!isUpdate">Add Banner</strong>
+        <strong *ngIf="isUpdate">Update Banner</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="brandFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="brandName">Brand Name</label>
+                <div class="col-md-9">
+                    <input type="text" id="brandName" class="form-control" placeholder="Enter Brand Name" formControlName="brandName">
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="!isUpdate" type="submit" class="btn btn-sm btn-primary" [disabled]="!brandFormGroup.valid" (click)="addBrand()"><i class="fa fa-dot-circle-o"></i>
+          Submit</button>
+        <button *ngIf="isUpdate" type="submit" class="btn btn-sm btn-primary" [disabled]="!brandFormGroup.valid" (click)="updateBrand()"><i class="fa fa-dot-circle-o"></i>
+          Update</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+          Reset</button>
+    </div>
+</div>

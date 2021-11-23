@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Discount List</strong>
+        <button class="btn btn-success active float-right mr-2" [routerLink]="['/discount/add']" routerLinkActive="router-link-active" type="button" aria-pressed="true">
+            Add Discount
+          </button>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-hover text-center" *ngIf="discounts.length">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Discount Image</th>
+                    <th>Discount Name</th>
+                    <th>Discount Type</th>
+                    <th>Discount Number</th>
+                    <th>Discount In</th>
+                    <th>Valid From</th>
+                    <th>Valid Up To</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let discount of discounts; let i=index">
+                    <td>{{i+1}}</td>
+                    <td> <img style="max-height: 50px;" src="{{discount?.discountImg}}" alt="{{discount?.title}}">
+                    </td>
+                    <td>{{discount?.discountName}}</td>
+                    <td>{{discount?.discountType}}</td>
+                    <td>{{discount?.discountNumber}}</td>
+                    <td>{{discount?.discountIn}}</td>
+                    <td>{{discount?.validFrom | date}}</td>
+                    <td>{{discount?.validUpto | date}}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{'badge-danger':discount.status=='DEACTIVE','badge-success':discount.status=='ACTIVE'}">{{discount?.status}}</span>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-sm btn-primary" [routerLink]="['/discount/edit',discount?.discountId]">
+                            <i class="fa fa-pencil"></i>Edit
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!discounts.length">
+            <p class="text-center">No Data Found</p>
+        </div>
+    </div>
+</div>

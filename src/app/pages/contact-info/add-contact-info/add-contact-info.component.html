@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-header">
+        <strong *ngIf="!isUpdate">Add Contact Information</strong>
+        <strong *ngIf="isUpdate">Update Contact Information</strong>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" [formGroup]="contactFormGroup">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="email">Email</label>
+                <div class="col-md-9">
+                    <input type="text" id="email" class="form-control" placeholder="Enter Email" formControlName="email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="phoneNumber">Phone Number</label>
+                <div class="col-md-9">
+                    <input type="number" id="phoneNumber" class="form-control" placeholder="Enter Number" formControlName="phoneNumber">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="mobileNumber">Mobile Number</label>
+                <div class="col-md-9">
+                    <input type="number" id="mobileNumber" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="address">Address</label>
+                <div class="col-md-9">
+                    <input type="text" id="address" class="form-control" placeholder="Enter Address" formControlName="address">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="!isUpdate" type="submit" class="btn btn-sm btn-primary" [disabled]="!contactFormGroup.valid" (click)="addContactInfo()"><i class="fa fa-dot-circle-o"></i>
+        Submit</button>
+        <button *ngIf="isUpdate" type="submit" class="btn btn-sm btn-primary" [disabled]="!contactFormGroup.valid" (click)="addContactInfo()"><i class="fa fa-dot-circle-o"></i>
+        Update</button>
+        <button type="reset" class="btn btn-sm btn-danger" (click)="resetForm()"><i class="fa fa-ban"></i>
+        Reset</button>
+    </div>
+</div>
